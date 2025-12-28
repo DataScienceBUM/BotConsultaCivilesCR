@@ -26,4 +26,6 @@ if (!str_detect(versionesInstaladas, version) %>% sum() > 0) {
   unzip(paste0(version, '.zip'), exdir = version)
   dir.create(paste0(rutaDestino, '/', version))
   file.copy(paste0(version, '/chromedriver.exe'), paste0(rutaDestino, '/', version, '/chromedriver.exe'))
+  unlink(version, recursive = TRUE)
+  file.remove(paste0(version, '.zip'))
 }
