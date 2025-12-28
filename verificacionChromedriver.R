@@ -1,12 +1,3 @@
-if (!require('pacman'))
-  install.packages('pacman')
-
-pacman::p_load(rvest, binman, stringr, dplyr)
-
-library(rvest)
-library(binman)
-library(stringr)
-
 url <- 'https://googlechromelabs.github.io/chrome-for-testing/#stable'
 
 datos <- read_html(url) %>% html_element('#stable')
