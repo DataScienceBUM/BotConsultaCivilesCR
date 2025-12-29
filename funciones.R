@@ -105,19 +105,41 @@ informacionMatrimonio <- function() {
     tabla <- panel[[1]]$findChildElements('xpath', './/a[contains(text(),"Detalle")]')
     tabla[[length(tabla)]]$clickElement()
     Sys.sleep(0.5)
-    campos <- c(
-      'lblcita',
-      'lblcedula_conyugue',
-      'lblnombre_conyugue',
-      'lbllugar_suceso',
-      'lblfecha_suceso',
-      'lbltipo_relacion',
-      'lblextrangero',
-      'lblfallecido'
-    )
+    
+    verificacionExtranjero <- rsc$findElements('id', 'lblextrangero')
+    
+    if (length(verificacionExtranjero) > 1) {
+      #dado caso que se encuentre el campo, no es extranjero
+      campos <- c(
+        'lblcita',
+        'lblcedula_conyugue',
+        'lblnombre_conyugue',
+        'lbllugar_suceso',
+        'lblfecha_suceso',
+        'lbltipo_relacion',
+        'lblextrangero',
+        'lblfallecido'
+      )
+      
+      
+    } else{
+      
+      campos <- c(
+        'lblcita',
+        'lblnombreconyugue',
+        'lblfechasuceso',
+        'lbltiporelacion',
+        'lblpadreconyugue',
+        'lblmadreconyugue'
+      )
+      
+      
+    }
+    
     for (campo in campos) {
       elemento <- rsc$findElement('id', campo)
       datos[[campo]] <- elemento$getElementText()[[1]]
+      
     }
     
   } else{
